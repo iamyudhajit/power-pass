@@ -28,14 +28,20 @@ const Manager = () => {
   };
 
   const savePassword = () => {
-    console.log(form);
-    setPasswordArray([...passwordArray, {...form,id:uuidv4()}]);
-    localStorage.setItem(
-      "passwords",
-      JSON.stringify([...passwordArray, { ...form, id: uuidv4() }])
-    );
-    console.log([...passwordArray, { ...form, id: uuidv4() }]);
-    toast("Password Saved Successfully! 🔒");
+    if(form.site.length>3 && form.username.length>3 && form.password.length>3){
+      console.log(form);
+      setPasswordArray([...passwordArray, { ...form, id: uuidv4() }]);
+      localStorage.setItem(
+        "passwords",
+        JSON.stringify([...passwordArray, { ...form, id: uuidv4() }])
+      );
+      console.log([...passwordArray, { ...form, id: uuidv4() }]);
+      toast("Password Saved Successfully! 🔒");
+    }
+    else{
+      toast("Error ‼️");
+    }
+    
   };
 
   const deletePassword = (id) => {
